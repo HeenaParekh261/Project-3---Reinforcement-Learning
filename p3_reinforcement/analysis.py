@@ -25,6 +25,10 @@ def question2():
     answerNoise = 0 # change this to be 0 so that agent will just go in a straight line and not fall off
     return answerDiscount, answerNoise
 
+
+# Here are the optimal policy types you should attempt to produce:
+
+#a. Prefer the close exit (+1), risking the cliff (-10)
 def question3a():
     answerDiscount = None
     answerNoise = None
@@ -32,6 +36,7 @@ def question3a():
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
+#b. Prefer the close exit (+1), but avoiding the cliff (-10)
 def question3b():
     answerDiscount = None
     answerNoise = None
@@ -39,6 +44,7 @@ def question3b():
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
+#c. Prefer the distant exit (+10), risking the cliff (-10)
 def question3c():
     answerDiscount = None
     answerNoise = None
@@ -46,6 +52,7 @@ def question3c():
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
+#d. Prefer the distant exit (+10), avoiding the cliff (-10)
 def question3d():
     answerDiscount = None
     answerNoise = None
@@ -53,6 +60,7 @@ def question3d():
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
+#e. Avoid both exits and the cliff (so an episode should never terminate)
 def question3e():
     answerDiscount = None
     answerNoise = None
