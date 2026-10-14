@@ -20,8 +20,9 @@
 # value iteration.
 
 def question2():
+    # bridge crossing analysis -> Change only ONE of the discount and noise parameters so that the optimal policy causes the agent to attempt to cross the bridge.
     answerDiscount = 0.9
-    answerNoise = 0.2
+    answerNoise = 0 # change this to be 0 so that agent will just go in a straight line and not fall off
     return answerDiscount, answerNoise
 
 def question3a():
