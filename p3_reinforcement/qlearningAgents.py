@@ -43,7 +43,9 @@ class QLearningAgent(ReinforcementAgent):
         ReinforcementAgent.__init__(self, **args)
 
         "*** YOUR CODE HERE ***"
+        self.qvals = util.Counter()
 
+# Make sure that in your computeValueFromQValues and computeActionFromQValues functions, you only access Q values by calling getQValue . This abstraction will be useful for question 10 when you override getQValue to use features of state-action pairs rather than state-action pairs directly.
     def getQValue(self, state, action):
         """
           Returns Q(state,action)
@@ -51,10 +53,9 @@ class QLearningAgent(ReinforcementAgent):
           or the Q node value otherwise
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return (self.qvals[(state, action)])
+        #util.raiseNotDefined()
 
-
-# Make sure that in your computeValueFromQValues and computeActionFromQValues functions, you only access Q values by calling getQValue . This abstraction will be useful for question 10 when you override getQValue to use features of state-action pairs rather than state-action pairs directly.
     def computeValueFromQValues(self, state):
         """
           Returns max_action Q(state,action)
@@ -63,7 +64,20 @@ class QLearningAgent(ReinforcementAgent):
           terminal state, you should return a value of 0.0.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        #look at legal actions
+        actions = self.getLegalActions(state)
+        if len(actions) == 0:
+            return 0.0
+        #look at the q values for each action and return the max
+        bestAction = None
+        bestQval = float('-inf')
+        for action in actions:
+            qval = self.getQValue(state, action)
+            if qval > bestQval:
+                bestQval = qval
+                bestAction = action
+        return bestQval
+        #util.raiseNotDefined()
 
     def computeActionFromQValues(self, state):
         """
@@ -74,7 +88,19 @@ class QLearningAgent(ReinforcementAgent):
         "*** YOUR CODE HERE ***"
 
         #note: break ties randomly for better behavior. The random.choice() function will help. In a particular state, actions that your agent hasn't seen before still have a Q-value, specifically a Q-value of zero, and if all of the actions that your agent has seen before have a negative Q-value, an unseen action may be optimal.
-        util.raiseNotDefined()
+        actions = self.getLegalActions(state)
+        if len(actions) == 0:
+            return None
+        bestAction = None
+        bestQval = float('-inf')
+        for action in actions:
+            qval = self.getQValue(state, action)
+            if qval > bestQval:
+                bestQval = qval
+                bestAction = action
+            #randomly pick between actions with the same q value
+        return bestAction
+        #util.raiseNotDefined()
 
     def getAction(self, state):
         """
@@ -105,6 +131,8 @@ class QLearningAgent(ReinforcementAgent):
           it will be called on your behalf
         """
         "*** YOUR CODE HERE ***"
+        #this is where we use the bellman equation
+        
         util.raiseNotDefined()
 
     def getPolicy(self, state):
