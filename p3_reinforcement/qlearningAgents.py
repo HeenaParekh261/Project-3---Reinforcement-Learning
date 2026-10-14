@@ -54,6 +54,7 @@ class QLearningAgent(ReinforcementAgent):
         util.raiseNotDefined()
 
 
+# Make sure that in your computeValueFromQValues and computeActionFromQValues functions, you only access Q values by calling getQValue . This abstraction will be useful for question 10 when you override getQValue to use features of state-action pairs rather than state-action pairs directly.
     def computeValueFromQValues(self, state):
         """
           Returns max_action Q(state,action)
@@ -71,6 +72,8 @@ class QLearningAgent(ReinforcementAgent):
           you should return None.
         """
         "*** YOUR CODE HERE ***"
+
+        #note: break ties randomly for better behavior. The random.choice() function will help. In a particular state, actions that your agent hasn't seen before still have a Q-value, specifically a Q-value of zero, and if all of the actions that your agent has seen before have a negative Q-value, an unseen action may be optimal.
         util.raiseNotDefined()
 
     def getAction(self, state):
