@@ -117,8 +117,16 @@ class QLearningAgent(ReinforcementAgent):
         legalActions = self.getLegalActions(state)
         action = None
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        #If no legal actions
+        if len(legalActions) == 0:
+            return action
 
+        if util.flipCoin(self.epsilon):
+            action = random.choice(legalActions)
+        else:
+            action = self.computeActionFromQValues(state)
+
+        #util.raiseNotDefined()
         return action
 
     def update(self, state, action, nextState, reward):
@@ -132,8 +140,10 @@ class QLearningAgent(ReinforcementAgent):
         """
         "*** YOUR CODE HERE ***"
         #this is where we use the bellman equation
-        
-        util.raiseNotDefined()
+        oldQVal = self.getQValue(state, action)
+        newQVal = oldQVal + self.alpha * (reward + (self.discount * (self.getValue(nextState))) - oldQVal)
+        self.qvals[(state, action)] = newQVal
+        #util.raiseNotDefined()
 
     def getPolicy(self, state):
         return self.computeActionFromQValues(state)
